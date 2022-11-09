@@ -1349,7 +1349,7 @@ index 4dfe4620f4..76da5bf815 100644
  	@echo "example: build all targets for the FVP platform:"
 -	@echo "  CROSS_COMPILE=aarch64-none-elf- make PLAT=fvp all"
 diff --git a/arch/arm/cpu/armv8/txlx/firmware/scp_task/Makefile b/arch/arm/cpu/armv8/txlx/firmware/scp_task/Makefile
-index 2e1eee819b..50dd4d89bb 100644
+index 2e1eee819b..e70c3b11aa 100644
 --- a/arch/arm/cpu/armv8/txlx/firmware/scp_task/Makefile
 +++ b/arch/arm/cpu/armv8/txlx/firmware/scp_task/Makefile
 @@ -6,7 +6,6 @@ include $(buildtree)/include/autoconf.mk
@@ -1360,16 +1360,17 @@ index 2e1eee819b..50dd4d89bb 100644
  ASM=$(CROSS_COMPILE)as
  CC=$(CROSS_COMPILE)gcc
  CPP=$(CROSS_COMPILE)cpp
-@@ -14,8 +13,6 @@ LD=$(CROSS_COMPILE)ld
+@@ -14,17 +13,10 @@ LD=$(CROSS_COMPILE)ld
  OBJCOPY=$(CROSS_COMPILE)objcopy
  OBJDUMP=$(CROSS_COMPILE)objdump
  
 -ARM_ARCH=armv7-m
 -ARM_CPU=cortex-m3
- CFLAGS_WARN=-Wall -Werror -Wundef -Wstrict-prototypes -Wno-trigraphs      \
-             -fno-strict-aliasing -fno-common -fomit-frame-pointer         \
-             -Werror-implicit-function-declaration -Wno-format-security    \
-@@ -24,7 +21,7 @@ CFLAGS_WARN=-Wall -Werror -Wundef -Wstrict-prototypes -Wno-trigraphs      \
+-CFLAGS_WARN=-Wall -Werror -Wundef -Wstrict-prototypes -Wno-trigraphs      \
+-            -fno-strict-aliasing -fno-common -fomit-frame-pointer         \
+-            -Werror-implicit-function-declaration -Wno-format-security    \
+-            -fno-delete-null-pointer-checks -Wdeclaration-after-statement \
+-            -Wno-pointer-sign -fno-strict-overflow -fconserve-stack
  CFLAGS_DEBUG=-g
  
  # CPU specific compilation flags
@@ -1378,7 +1379,7 @@ index 2e1eee819b..50dd4d89bb 100644
  
  # FPU compilation flags
  CFLAGS_FPU-$(CONFIG_FPU)=-mfpu=fpv4-sp-d16 -mfloat-abi=hard
-@@ -42,7 +39,7 @@ VPATH_LIST=     $(buildsrc)/$(BOARDDIR)
+@@ -42,7 +34,7 @@ VPATH_LIST=     $(buildsrc)/$(BOARDDIR)
  VPATH_LIST:=$(VPATH_LIST:%=%/firmware/scp_task/)
  
  CFLAGS=$(CFLAGS_CPU) $(CFLAGS_WARN) $(VPATH_LIST:%=-I%) $(CFLAGS_INCLUDE) $(CFLAGS_FPU-y)
